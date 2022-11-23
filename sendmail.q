@@ -1,4 +1,4 @@
-\l qmail.q
+\l qmail.q;
 
 // get sendmail user
 user:.z.X 2;
@@ -6,7 +6,7 @@ user:.z.X 2;
 quit:{
     show "Please pass sendmail user to script";
     exit 11
-  }
+    };
 
 if [0=count user; quit[]];
 
@@ -42,6 +42,6 @@ santamail:{
     .mail.send[user; address; "Who shall be thy beneficiary?"; BODY; `];
 
     x + 1
-  };
+    };
 
-santamail/[count map; 0]
+santamail/[count map; 0];
