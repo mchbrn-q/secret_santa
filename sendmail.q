@@ -1,19 +1,22 @@
-\l qmail.q;
+\l qmail.q
 
 // get sendmail user
 user:.z.X 2;
 
 quit:{
-    show "Please pass sendmail user to script";
+    show x;
     exit 11
     };
 
-if [0=count user; quit[]];
+// error handling
+if [0=count user; quit "Please pass sendmail user to script"];
+data:@[("SS"; enlist ",") 0:; `:santas.csv; {quit "Please create and populate santas.csv"}];
+if [0=count data; quit "Please add fields to santas.csv"];
+if [1=count data; quit "Please add more than one field to santas.csv"];
 
 // reset random seed
 system "S ", string 7h$.z.t;
 
-data:("SS"; enlist ",") 0: `:santas.csv;
 map:(data `address)!(data `name);
 randoms:();
 
