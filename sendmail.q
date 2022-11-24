@@ -4,15 +4,14 @@
 user:.z.X 2;
 
 quit:{
-    show x;
-    exit 11
+    show y;
+    exit x
     };
 
 // error handling
-if [0=count user; quit "Please pass sendmail user to script"];
-data:@[("SS"; enlist ",") 0:; `:santas.csv; {quit "Please create and populate santas.csv"}];
-if [0=count data; quit "Please add fields to santas.csv"];
-if [1=count data; quit "Please add more than one field to santas.csv"];
+if [0=count user; quit[11; "Please pass sendmail user to script"]];
+data:@[("SS"; enlist ",") 0:; `:santas.csv; {quit[11; "Please create and populate santas.csv"]}];
+$[0=count data; quit[11; "Please add fields to santas.csv"]; 1=count data; quit[11; "Please add more than one field to santas.csv"]];
 
 // reset random seed
 system "S ", string 7h$.z.t;
@@ -41,10 +40,11 @@ santamail:{
     add .mail.heading["3";"For secret santa this year, you will be giving gifts to . . ."];
     add .mail.bold[.mail.addcolor["rgb(8, 143, 143)"; beneficiary]];
 
-    show "Sending mail from ", user;
     .mail.send[user; address; "Who shall be thy beneficiary?"; BODY; `];
 
     x + 1
     };
 
-santamail/[count map; 0];
+/santamail/[count map; 0];
+
+quit[0; "Sending mail from ", user];
