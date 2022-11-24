@@ -45,6 +45,6 @@ santamail:{
     x + 1
     };
 
-/santamail/[count map; 0];
+santamail/[count map; 0];
 
 quit[0; "Sending mail from ", user];
