@@ -11,15 +11,15 @@ quit:{
 // error handling
 if [0=count user; quit[11; "Please pass sendmail user to script"]];
 data:@[("SS"; enlist ",") 0:; `:santas.csv; {quit[11; "Please create and populate santas.csv"]}];
-countdata:count data;
-$[0=countdata; quit[11; "Please add fields to santas.csv"]; (1=countdata) or (2=countdata); quit[11; "Please add three or more fields to santas.csv"]];
+datacount:count data;
+$[0=datacount; quit[11; "Please add fields to santas.csv"]; (1=datacount) or (2=datacount); quit[11; "Please add three or more fields to santas.csv"]];
 
 // reset random seed
 system "S ", string 7h$.z.t;
 
 map:(data `address)!(data `name);
-delete data from `.;
 randoms:();
+delete data from `.;
 
 // create random list of beneficiaries
 randomise:{$[not sum (value map)=randoms::(value map) (neg count map)?(count map); 1; 0]};
