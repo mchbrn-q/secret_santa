@@ -18,6 +18,7 @@ system "S ", string 7h$.z.t;
 
 map:(data `address)!(data `name);
 randoms:();
+
 delete data from `.;
 
 // create random list of beneficiaries
@@ -46,6 +47,6 @@ santamail:{
     x + 1
     };
 
-/santamail/[count map; 0];
+santamail/[count map; 0];
 
 quit[0; "Sending mail from ", user];
