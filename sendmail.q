@@ -44,6 +44,8 @@ santamail:{
 
     .mail.send[user; address; "Who shall be thy beneficiary?"; BODY; `];
 
+    delete BODY from `.;
+
     x + 1
     };
 
